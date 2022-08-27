@@ -1,0 +1,23 @@
+
+def google(request):
+    c = Choose.objects.all()
+    for i in c:
+        webdriver_options = webdriver.ChromeOptions()
+        webdriver_options.add_argument('headless')
+
+        driver = webdriver.Chrome("chromedriver.exe", chrome_options = webdriver_options)
+        driver.get(f"https://www.google.com/search?q={i.com}")
+        sleep(0.5)
+        ht = driver.page_source
+        soup = BeautifulSoup(ht,"html.parser")
+
+        for k,i in enumerate(soup.select("div.yuRUbf"), start=1):
+            a = i.select_one("a > h3").text
+            search.append(a)
+            g_link.append(i.select_one("a").get("href"))
+    context = {
+        "cset" : c,
+        "gl" : g_link,
+        "se" : search
+    }
+    return render(request, "gyn/google.html", context)
