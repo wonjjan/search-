@@ -1,0 +1,23 @@
+
+def main(request):
+    c = Choose.objects.get
+    context = {
+        "c" : c
+    }
+    if request.method == "POST":
+        if request.POST.get("choose") == "구글":
+            Choose(cho=request.POST.get("choose")).save()
+            Choose(com=request.POST.get("comment")).save()
+            return redirect("google")
+        if request.POST.get("choose") == "유튜브":
+            Choose(cho=request.POST.get("choose")).save()
+            Choose(com=request.POST.get("comment")).save()
+            return redirect("youtube")
+        if request.POST.get("choose") == "네이버":
+            Choose(cho=request.POST.get("choose")).save()
+            Choose(com=request.POST.get("comment")).save()
+            return redirect("naver")
+    else:
+        pass
+    return render(request, "gyn/main.html", context)
+
