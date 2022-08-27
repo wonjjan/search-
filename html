@@ -1,0 +1,25 @@
+<h1>구글</h1>
+
+<table border="1">
+    <tr>
+        <th>검색결과</th>
+        <th>링크</th>
+    </tr>
+        <tr>
+            {% for i in se %}
+                <td>{{ i }}</td>
+            {% empty %}
+                <td>검색결과 없음</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for i in gl %}
+                <td><a href="{{ i }}"><button>이동!</button></a></td>
+            {% empty %}
+                <td>링크 없음</td>
+            {% endfor %}
+        </tr>
+</table>
+
+<a href="{% url 'pot' %}"><button>처음화면</button></a>
+<a href="{% url 'delete' %}"><button>홈</button></a>
