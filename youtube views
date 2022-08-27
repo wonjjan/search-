@@ -1,0 +1,25 @@
+
+def youtube(request):
+    c = Choose.objects.all()
+    for i in c:
+        webdriver_options = webdriver.ChromeOptions()
+        webdriver_options.add_argument('headless')
+
+        driver = webdriver.Chrome("chromedriver.exe", chrome_options = webdriver_options)
+        driver.get(f"https://www.youtube.com/results?search_query={i.com}")
+        sleep(0.5)
+        ht = driver.page_source
+        soup = BeautifulSoup(ht,"html.parser")
+
+        for k,i in enumerate(soup.select("a#video-title"), start=1):
+            title = i.select_one("yt-formatted-string").text
+            search.append(title)
+            link1 = i.get("href")
+            link = "https://www.youtube.com/" + link1
+            y_link.append(link)
+    context = {
+        "cset" : c,
+        "yl" : y_link,
+        "se" : search
+    }
+    return render(request, "gyn/youtube.html", context)
