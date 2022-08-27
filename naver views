@@ -1,0 +1,23 @@
+
+def naver(request):
+    c = Choose.objects.all()
+    for i in c:
+        webdriver_options = webdriver.ChromeOptions()
+        webdriver_options.add_argument('headless')
+
+        driver = webdriver.Chrome("chromedriver.exe", chrome_options = webdriver_options)
+        driver.get(f"https://search.naver.com/search.naver?display=15&f=&filetype=0&page=2&query={i.com}research_url=&sm=tab_pge&start=1&where=web")
+        sleep(0.5)
+        ht = driver.page_source
+        soup = BeautifulSoup(ht,"html.parser")
+
+        for k,i in enumerate(soup.select("a.link_tit"), start=1):
+            search.append(i.text)
+            link1 = i.get("href")
+            n_link.append(link1)
+    context = {
+        "cset" : c,
+        "nl" : n_link,
+        "se" : search
+    }
+    return render(request, "gyn/naver.html", context)
