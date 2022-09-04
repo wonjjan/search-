@@ -1,0 +1,22 @@
+<h1>네이버</h1>
+
+<table border="1">
+    <tr>
+        <th>검색결과</th>
+        <th>링크</th>
+    </tr>
+        <tr>
+            {% for i in se %}
+                <td>{{ i }}</td>
+            {% empty %}
+                <td>검색결과 없음</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for i in nl %}
+                <td><a href="{{ i }}"><button>이동!</button></a></td>
+            {% empty %}
+                <td>링크 없음</td>
+            {% endfor %}
+        </tr>
+</table>
